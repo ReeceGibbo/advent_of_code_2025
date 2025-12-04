@@ -2,6 +2,7 @@
 
 using AdventOfCode2025.Day2;
 using AdventOfCode2025.Day3;
+using AdventOfCode2025.Day4;
 
 namespace AdventOfCode2025;
 
@@ -50,7 +51,27 @@ public class Program
         // Console.WriteLine($"Password: {day2TestPart2.GetFinalComputedValue()}");
         // Console.WriteLine($"Password (Part 2): {day1ResultPart2}");
         
-        var path = Path.Combine(baseDir, "puzzle_inputs", "day3_input.txt");
+        // var path = Path.Combine(baseDir, "puzzle_inputs", "day3_input.txt");
+        //
+        // if (!File.Exists(path))
+        // {
+        //     Console.WriteLine($"File not found: {path}");
+        //     return;
+        // }
+        //
+        // var text = File.ReadAllText(path);
+        // var splitText = text.Trim().Split('\n');
+        //
+        // var day3Test = new Day3Part1();
+        // var day3Result = day3Test.Run(splitText);
+        //
+        // var day3Test2 = new Day3Part2();
+        // var day3Result2 = day3Test2.Run(splitText);
+        //
+        // Console.WriteLine($"Password: {day3Result}");
+        // Console.WriteLine($"Password 2: {day3Result2}");
+        
+        var path = Path.Combine(baseDir, "puzzle_inputs", "day4_input.txt");
         
         if (!File.Exists(path))
         {
@@ -61,9 +82,9 @@ public class Program
         var text = File.ReadAllText(path);
         var splitText = text.Trim().Split('\n');
         
-        var day3Test = new Day3Part1();
-        var day3Result = day3Test.Run(splitText);
+        var day4 = new Day4Part1();
+        var day4Result = day4.Run(splitText);
         
-        Console.WriteLine($"Password: {day3Result}");
+        Console.WriteLine($"Password: {day4Result}");
     }
 }
