@@ -85,6 +85,10 @@ public class Program
         var day4 = new Day4Part1();
         var day4Result = day4.Run(splitText);
         
+        var day4Part2 = new Day4Part2();
+        var day4Result2 = day4Part2.Run(splitText);
+        
         Console.WriteLine($"Password: {day4Result}");
+        Console.WriteLine($"Password (Part 2): {day4Result2}");
     }
 }

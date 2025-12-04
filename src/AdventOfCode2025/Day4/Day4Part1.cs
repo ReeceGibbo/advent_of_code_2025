@@ -81,7 +81,7 @@ public class Day4Part1
                     var totalRolls = leftValue + rightValue + upValue + downValue + topLeftValue + topRightValue +
                                      bottomLeftValue + bottomRightValue;
 
-                    if (totalRolls < 4)
+                    if (totalRolls < 4 && hashMap[x, y] != 2)
                     {
                         hashMap[x, y] = 2;
                         accessedAmountOfPaper++;
