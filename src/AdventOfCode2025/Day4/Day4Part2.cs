@@ -29,9 +29,10 @@ public class Day4Part2
 
         var arrWidth = hashMap.GetLength(0);
         var arrHeight = hashMap.GetLength(1);
-
+        
         while (removedAmountOfPaper != 0)
         {
+            Console.Clear();
             var paperToRemove = new List<Vector2>();
             
             for (var y = 0; y < arrHeight; y++)
