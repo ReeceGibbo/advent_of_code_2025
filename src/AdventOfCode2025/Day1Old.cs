@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode2025;
 
-public class Day1
+public class Day1Old
 {
     private int _rotation = 50;
     private int _pointedAtZero = 0;

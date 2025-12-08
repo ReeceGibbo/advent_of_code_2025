@@ -12,27 +12,30 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        AnsiConsole.MarkupLine("[bold aqua]Advent of Code Launcher[/]");
-        AnsiConsole.MarkupLine("Use [green]↑[/]/[green]↓[/] arrows and [green]Enter[/] to choose a day/part.");
-        AnsiConsole.WriteLine();
-
-        var selection = PromptForDayAndPart();
-        if (selection is null)
-        {
-            AnsiConsole.MarkupLine("[yellow]No selection made, exiting.[/]");
-            return;
-        }
-
-        var input = PromptForPuzzleInput(selection);
-
-        AnsiConsole.WriteLine();
-        AnsiConsole.MarkupLine($"[bold]You selected:[/] [green]{selection}[/]");
-        AnsiConsole.MarkupLine(
-            $"[grey]Loaded puzzle input with [yellow]{input.LineCount}[/] lines and [yellow]{input.CharCount}[/] characters.[/]");
-
-        Console.ReadLine();
+        App.Run();
         
-        RunPuzzle(selection, input.Text);
+        // AnsiConsole.MarkupLine("[bold aqua]----------------------------------------[/]");
+        // AnsiConsole.MarkupLine("[bold aqua]Advent of Code Launcher[/]");
+        // AnsiConsole.MarkupLine("Use arrows and [green]Enter[/] to choose a day/part.");
+        // AnsiConsole.MarkupLine("[bold aqua]----------------------------------------[/]");
+        //
+        // AnsiConsole.WriteLine();
+        //
+        // var selection = PromptForDayAndPart();
+        // if (selection is null)
+        // {
+        //     AnsiConsole.MarkupLine("[yellow]No selection made, exiting.[/]");
+        //     return;
+        // }
+        //
+        // var input = PromptForPuzzleInput(selection);
+        //
+        // AnsiConsole.Clear();
+        // AnsiConsole.MarkupLine($"[bold]You selected:[/] [green]{selection}[/]");
+        // AnsiConsole.MarkupLine(
+        //     $"[grey]Loaded puzzle input with [yellow]{input.LineCount}[/] lines and [yellow]{input.CharCount}[/] characters.[/]");
+        //
+        // RunPuzzle(selection, input.Text);
 
         var baseDir = AppContext.BaseDirectory;
         // var path = Path.Combine(baseDir, "puzzle_inputs", "day1_input.txt");
@@ -160,10 +163,9 @@ public class Program
     {
         AnsiConsole.WriteLine();
         AnsiConsole.MarkupLine($"Selected [green]{selection}[/].");
-        AnsiConsole.MarkupLine("[bold]Puzzle input[/]");
         AnsiConsole.MarkupLine(
-            "[grey]Provide Puzzle Input:[/]\n" +
-            "  • drag & drop your input file into the console and press [green]Enter[/]\n");
+            "[bold]Provide Puzzle Input:[/]\n" +
+            "- drag & drop your input file into the console and press [green]Enter[/]\n");
 
         while (true)
         {
@@ -222,10 +224,10 @@ public class Program
         if (puzzle != null)
         {
             AnsiConsole.WriteLine();
-            AnsiConsole.MarkupLine($"[bold]Puzzle completed. Press any key to see final answer.[/]");
+            AnsiConsole.MarkupLine("[grey]To start calculating answer, press[/] [green]Enter[/].");
             Console.ReadLine();
 
-            AnsiConsole.WriteLine();
+            AnsiConsole.Clear();
             AnsiConsole.MarkupLine($"[grey]Answer:[/] [yellow]{puzzle.GetAnswer()}[/]");
             AnsiConsole.MarkupLine($"[bold]Press any key to exit.[/]");
             Console.ReadLine();
