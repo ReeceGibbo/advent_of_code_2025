@@ -24,7 +24,7 @@ public class ScreenDayPartSelection : IScreen
             new Markup(
                 $"[grey]Source:[/] [white]{Markup.Escape(_input.SourcePath ?? "<direct>")}[/]"),
             new Markup(
-                $"[grey]Lines: [yellow]{_input.LineCount}[/], chars: [yellow]{_input.CharCount}[/][/]\n")
+                $"[grey]Lines: [yellow]{_input.LineCount}[/], chars: [yellow]{_input.CharCount}[/][/]")
         );
         AnsiConsole.Write(Align.Center(rows, VerticalAlignment.Top));
         AnsiConsole.WriteLine();

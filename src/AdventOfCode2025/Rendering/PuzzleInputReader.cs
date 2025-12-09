@@ -12,6 +12,8 @@ public static class PuzzleInputReader
 {
     public static PuzzleInput RequestPuzzleInput(int day, int? part = null)
     {
+        AnsiConsole.WriteLine();
+        AnsiConsole.WriteLine();
         var partLabel = part.HasValue ? $" Part {part.Value}" : string.Empty;
 
         AnsiConsole.MarkupLine(
@@ -44,13 +46,8 @@ public static class PuzzleInputReader
                 var text = File.ReadAllText(line);
 
                 var lineCount = text
-                    .Split(new[] { "\r\n", "\n" }, StringSplitOptions.None)
+                    .Split(["\r\n", "\n"], StringSplitOptions.None)
                     .Length;
-
-                AnsiConsole.MarkupLine(
-                    $"[green]Loaded puzzle input from file:[/] [white]{Markup.Escape(line)}[/]");
-                AnsiConsole.MarkupLine(
-                    $"[grey]Lines: [yellow]{lineCount}[/], chars: [yellow]{text.Length}[/][/]");
 
                 return new PuzzleInput(text, lineCount, text.Length, line);
             }
