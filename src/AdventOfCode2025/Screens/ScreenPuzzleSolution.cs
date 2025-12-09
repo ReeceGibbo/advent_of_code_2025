@@ -35,8 +35,9 @@ public class ScreenPuzzleSolution : IScreen, IDynamicScreen
         AnsiConsole.Write(Align.Center(rows, VerticalAlignment.Top));
     }
 
-    public void Update(TimeSpan deltaTime)
+    public bool Update(TimeSpan deltaTime)
     {
+        return false;
     }
 
     public ScreenCommand HandleInput(ConsoleKeyInfo key)

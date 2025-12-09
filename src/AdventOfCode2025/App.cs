@@ -33,9 +33,10 @@ public static class App
 
             if (current is IDynamicScreen ticking)
             {
-                ticking.Update(delta);
+                var updateResult = ticking.Update(delta);
                 // Ticking screens want regular redraw
-                needsRender = true;
+                if (updateResult)
+                    needsRender = true;
             }
 
             // --- 2. Input handling (non-blocking) ---

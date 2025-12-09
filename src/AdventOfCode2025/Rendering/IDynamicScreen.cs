@@ -2,5 +2,5 @@
 
 public interface IDynamicScreen
 {
-    void Update(TimeSpan deltaTime);
+    bool Update(TimeSpan deltaTime);
 }
