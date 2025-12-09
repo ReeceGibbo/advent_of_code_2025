@@ -1,4 +1,5 @@
-﻿using AdventOfCode2025.Rendering;
+﻿using System.Diagnostics;
+using AdventOfCode2025.Rendering;
 using AdventOfCode2025.Screens;
 using Spectre.Console;
 
@@ -13,56 +14,92 @@ public static class App
 
         var running = true;
 
+        var stopwatch = Stopwatch.StartNew();
+        var lastTime = stopwatch.Elapsed;
+
+        var hasRenderedAtLeastOnce = false;
+
         while (running && screenStack.Count > 0)
         {
             var current = screenStack.Peek();
 
-            AnsiConsole.Clear();
-            RenderHeader(current.Title);
-            current.Render();
+            // --- 1. Time step for ticking screens ---
+            var now = stopwatch.Elapsed;
+            var delta = now - lastTime;
+            lastTime = now;
 
-            // No prompt / ReadLine anymore – we work on key presses
-            var keyInfo = Console.ReadKey(intercept: true);
+            // First iteration: force a render
+            var needsRender = !hasRenderedAtLeastOnce;
 
-            // Global keys (work on any screen)
-            if (keyInfo.Key is ConsoleKey.Q or ConsoleKey.Escape)
+            if (current is IDynamicScreen ticking)
             {
-                running = false;
-                continue;
+                ticking.Update(delta);
+                // Ticking screens want regular redraw
+                needsRender = true;
             }
 
-            if (keyInfo.Key is ConsoleKey.B)
+            // --- 2. Input handling (non-blocking) ---
+            if (Console.KeyAvailable)
             {
-                if (screenStack.Count > 1)
-                    screenStack.Pop();
-                continue;
-            }
+                var keyInfo = Console.ReadKey(intercept: true);
 
-            // Let the current screen handle everything else
-            var command = current.HandleInput(keyInfo);
+                // ✅ Any key press can potentially change UI → ask to re-render
+                needsRender = true;
 
-            switch (command.Type)
-            {
-                case ScreenCommandType.None:
-                    break;
-
-                case ScreenCommandType.PushScreen:
-                    if (command.ScreenToPush != null)
-                        screenStack.Push(command.ScreenToPush);
-                    break;
-
-                case ScreenCommandType.PopScreen:
+                // Global keys (work on any screen)
+                if (keyInfo.Key is ConsoleKey.Q or ConsoleKey.Escape)
+                {
+                    running = false;
+                }
+                else if (keyInfo.Key is ConsoleKey.B)
+                {
                     if (screenStack.Count > 1)
                         screenStack.Pop();
-                    break;
+                }
+                else
+                {
+                    // Let the current screen handle everything else
+                    var command = current.HandleInput(keyInfo);
 
-                case ScreenCommandType.Exit:
-                    running = false;
-                    break;
+                    switch (command.Type)
+                    {
+                        case ScreenCommandType.None:
+                            // nothing structural changed, but we still re-render
+                            break;
 
-                default:
-                    throw new ArgumentOutOfRangeException();
+                        case ScreenCommandType.PushScreen:
+                            if (command.ScreenToPush != null)
+                                screenStack.Push(command.ScreenToPush);
+                            break;
+
+                        case ScreenCommandType.PopScreen:
+                            if (screenStack.Count > 1)
+                                screenStack.Pop();
+                            break;
+
+                        case ScreenCommandType.Exit:
+                            running = false;
+                            break;
+
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
             }
+
+            // Screen might have changed (push/pop), so re-peek
+            current = screenStack.Peek();
+
+            // --- 3. Render if needed (first frame, tick, or any key) ---
+            if (needsRender)
+            {
+                AnsiConsole.Clear();
+                RenderHeader(current.Title);
+                current.Render();
+                hasRenderedAtLeastOnce = true;
+            }
+
+            Thread.Sleep(100); // ~10 FPS
         }
     }
 
@@ -77,7 +114,8 @@ public static class App
         rule.Justification = Justify.Center;
         AnsiConsole.Write(rule);
 
-        AnsiConsoleExtensions.WriteCentered("[grey]Keys: arrows to move, [b]Enter[/] to select, [b]B[/] back, [b]Q[/]/Esc quit.[/]");
+        AnsiConsoleExtensions.WriteCentered(
+            "[grey]Keys: arrows to move, [b]Enter[/] to select, [b]B[/] back, [b]Q[/]/Esc quit.[/]");
         AnsiConsole.WriteLine();
         AnsiConsole.WriteLine();
         AnsiConsole.WriteLine();

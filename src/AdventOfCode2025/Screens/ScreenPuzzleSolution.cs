@@ -3,7 +3,7 @@ using Spectre.Console;
 
 namespace AdventOfCode2025.Screens;
 
-public class ScreenPuzzleSolution : IScreen
+public class ScreenPuzzleSolution : IScreen, IDynamicScreen
 {
     public string Title { get; }
 
@@ -33,6 +33,10 @@ public class ScreenPuzzleSolution : IScreen
         );
 
         AnsiConsole.Write(Align.Center(rows, VerticalAlignment.Top));
+    }
+
+    public void Update(TimeSpan deltaTime)
+    {
     }
 
     public ScreenCommand HandleInput(ConsoleKeyInfo key)
