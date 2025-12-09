@@ -1,4 +1,5 @@
-﻿using Spectre.Console;
+﻿using AdventOfCode2025.Rendering;
+using Spectre.Console;
 
 namespace AdventOfCode2025.Day1;
 
@@ -12,9 +13,9 @@ public class Day1Part1 : IDayPuzzle
     /*
      * EG: R97, R83, L65, R90
      */
-    public Day1Part1(string input)
+    public Day1Part1(PuzzleInput input)
     {
-        var splitText = input
+        var splitText = input.Text
             .Split('\n')
             .Select(l => l.Trim())
             .Where(l => !string.IsNullOrEmpty(l))
@@ -25,37 +26,26 @@ public class Day1Part1 : IDayPuzzle
 
     private void CalculateAnswer()
     {
-        ConsoleUi.RunTimedProgress(
-            "Day 1 - Part 1",
-            _input.Length,
-            task =>
+        foreach (var line in _input)
+        {
+            if (string.IsNullOrWhiteSpace(line))
+                continue;
+
+            var decider = line[..1];
+            var number = int.Parse(line[1..]);
+
+            switch (decider)
             {
-                foreach (var line in _input)
-                {
-                    if (string.IsNullOrWhiteSpace(line))
-                        continue;
-
-                    var decider = line[..1];
-                    var number = int.Parse(line[1..]);
-
-                    switch (decider)
-                    {
-                        case "R":
-                            Rotate(true, number);
-                            break;
-                        case "L":
-                            Rotate(false, number);
-                            break;
-                        default:
-                            throw new Exception($"Unknown decider '{decider}'");
-                    }
-
-                    task.Increment(1);
-                }
-            });
-        
-        AnsiConsole.MarkupLine("[grey]Calculations complete, to see answer press[/] [green]Enter[/].");
-        Console.ReadLine();
+                case "R":
+                    Rotate(true, number);
+                    break;
+                case "L":
+                    Rotate(false, number);
+                    break;
+                default:
+                    throw new Exception($"Unknown decider '{decider}'");
+            }
+        }
     }
 
     private void Rotate(bool right, int amount)

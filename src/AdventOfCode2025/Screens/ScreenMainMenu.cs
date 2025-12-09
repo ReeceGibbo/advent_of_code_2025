@@ -81,7 +81,8 @@ public class ScreenMainMenu : IScreen
             case ConsoleKey.Enter:
             {
                 var day = _selectedIndex + 1;
-                return ScreenCommand.Push(new ScreenDayPartSelection(day));
+                var input = PuzzleInputReader.RequestPuzzleInput(day, part: null);
+                return ScreenCommand.Push(new ScreenDayPartSelection(day, input));
             }
 
             case ConsoleKey.B:
