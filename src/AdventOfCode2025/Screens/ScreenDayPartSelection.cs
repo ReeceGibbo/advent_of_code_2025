@@ -85,6 +85,7 @@ public class ScreenDayPartSelection : IScreen
         IDayPuzzle? puzzle = (_day, part) switch
         {
             (1, 1) => new Day1Part1(_input),
+            (1, 2) => new Day1Part2(_input),
             _ => null
         };
 
