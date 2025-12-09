@@ -8,7 +8,7 @@ public class ScreenMainMenu : IScreen
 {
     public string Title => "Main Menu";
 
-    private const int TotalDays = 25;
+    private const int TotalDays = 14;
     private const int Cols = 4;
     private readonly int _rows = (int)Math.Ceiling(TotalDays / (double)Cols);
 
