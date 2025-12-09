@@ -55,8 +55,7 @@ public class ScreenMainMenu : IScreen
             grid.AddRow(cells.ToArray());
         }
 
-        var centered = Align.Center(grid.Collapse(), VerticalAlignment.Top);
-        AnsiConsole.Write(centered);
+        AnsiConsole.Write(Align.Center(grid.Collapse(), VerticalAlignment.Top));
     }
 
     public ScreenCommand HandleInput(ConsoleKeyInfo key)

@@ -2,6 +2,8 @@
 using AdventOfCode2025.Screens;
 using Spectre.Console;
 
+namespace AdventOfCode2025;
+
 public static class App
 {
     public static void Run()
@@ -57,6 +59,9 @@ public static class App
                 case ScreenCommandType.Exit:
                     running = false;
                     break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }
@@ -72,11 +77,9 @@ public static class App
         rule.Justification = Justify.Center;
         AnsiConsole.Write(rule);
 
-        var centered =
-            Align.Center(
-                new Markup("[grey]Keys: arrows to move, [b]Enter[/] to select, [b]B[/] back, [b]Q[/]/Esc quit.[/]\n"),
-                VerticalAlignment.Top);
-        AnsiConsole.Write(centered);
+        AnsiConsoleExtensions.WriteCentered("[grey]Keys: arrows to move, [b]Enter[/] to select, [b]B[/] back, [b]Q[/]/Esc quit.[/]");
+        AnsiConsole.WriteLine();
+        AnsiConsole.WriteLine();
         AnsiConsole.WriteLine();
     }
 }

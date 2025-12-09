@@ -18,9 +18,10 @@ public class ScreenNotImplemented : IScreen
 
     public void Render()
     {
-        AnsiConsole.MarkupLine(
-            $"[red]Day {_day} Part {_part} is not implemented yet.[/]");
-        AnsiConsole.MarkupLine("[grey]Press [b]B[/] to go back.[/]");
+        AnsiConsoleExtensions.WriteCentered($"[red]Day {_day} Part {_part} has not implemented yet.[/]");
+        AnsiConsole.WriteLine();
+        AnsiConsoleExtensions.WriteCentered("[grey]Press [b]B[/] to go back.[/]");
+        AnsiConsole.WriteLine();
     }
 
     public ScreenCommand HandleInput(ConsoleKeyInfo key)
