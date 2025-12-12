@@ -10,6 +10,7 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::C4615A28-81D8-41EC-A0F1-C02E7CAD35A8::net9.0::AdventOfCode2025.Tests.Day6Tests.Part2&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::C4615A28-81D8-41EC-A0F1-C02E7CAD35A8::net9.0::AdventOfCode2025.Tests.Day6Tests.Part1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::C4615A28-81D8-41EC-A0F1-C02E7CAD35A8::net9.0::AdventOfCode2025.Tests.Day7Tests.Part1&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c3758916_002D5813_002D4b37_002D908d_002D1b0667d9afb8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
